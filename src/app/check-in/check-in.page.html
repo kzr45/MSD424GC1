@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab1"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Check-In
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Display current location information and check-in/check-out buttons -->
+  <ion-card>
+    <ion-card-header>
+      Current Location
+    </ion-card-header>
+    <ion-card-content>
+      <p *ngIf="currentPosition">Latitude: {{ currentPosition.coords.latitude }}</p>
+      <p *ngIf="currentPosition">Longitude: {{ currentPosition.coords.longitude }}</p>
+      <p *ngIf="currentTime">Current Time: {{ currentTime }}</p>
+      <!-- Check-in and check-out buttons -->
+      <ion-button expand="block" (click)="checkIn()">Check In</ion-button>
+      <ion-button expand="block" (click)="checkOut()">Check Out</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-list [inset]="true">
+    <ion-item *ngFor="let record of checkInRecords" [button]="true" detail="false">
+      <!-- Display different icons based on check-in type -->
+      <div slot="start">
+        <ion-icon [name]="record.checkIn ? 'briefcase-outline' : 'footsteps-outline'"></ion-icon>
+      </div>
+      <ion-label>
+        &nbsp;&nbsp;Location: {{ record.companyName }} <!-- Display check-in location -->
+        <!-- If there is a remark, display the remark information; otherwise, display "No Remark" -->
+        <p *ngIf="record.remark !== undefined">Remark: {{ record.remark }}</p>
+        <p *ngIf="record.remark === undefined">No Remark</p>
+      </ion-label>
+      <!-- Display check-in status icon and time -->
+      <div class="metadata-end-wrapper" slot="end">
+        <ion-button fill="clear" [disabled]="true">
+          <ion-icon [name]="record.checkIn ? 'checkmark-done-circle-outline' : 'close-circle-outline'"></ion-icon>
+          {{ record.checkIn ? 'Check In' : 'Check Out' }} <!-- Display check-in or check-out based on type -->
+        </ion-button>
+        <ion-note color="medium">{{ record.time }}</ion-note> <!-- Display check-in time -->
+        <ion-icon color="medium" name="chevron-forward"></ion-icon>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

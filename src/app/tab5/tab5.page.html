@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      My Profile
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Personal Information</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form>
+        <ion-list>
+          <ion-item>
+            <ion-label position="stacked">Name:</ion-label>
+            <ion-input [(ngModel)]="user.name" name="name" [readonly]="!isEditable"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Age:</ion-label>
+            <ion-input type="number" [(ngModel)]="user.age" name="age" [readonly]="!isEditable"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Gender:</ion-label>
+            <ion-select [(ngModel)]="user.gender" name="gender" [disabled]="!isEditable">
+              <ion-select-option value="male">Male</ion-select-option>
+              <ion-select-option value="female">Female</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <ion-button expand="block" (click)="enableEditing()" *ngIf="!isEditable">Edit Profile</ion-button>
+        <ion-button expand="block" (click)="updateProfile()" *ngIf="isEditable">Save Changes</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<!-- <ion-content>
+  <ion-button (click)="navigateToLogin()">登录</ion-button>
+</ion-content>
+
+<ion-content>
+  <ion-button (click)="navigateToRegister()">注册</ion-button>
+</ion-content> -->

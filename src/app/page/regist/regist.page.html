@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- Add back button -->
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>User Registration</ion-title>
+    <!-- Add click event for the save button -->
+    <ion-button slot="end" size="small" (click)="register()">Save</ion-button>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Username</ion-label>
+      <ion-input [(ngModel)]="user.username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">E-mail</ion-label>
+      <ion-input [(ngModel)]="user.email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Password</ion-label>
+      <ion-input type="password" [(ngModel)]="user.password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Phone</ion-label>
+      <ion-input [(ngModel)]="user.phone"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Nickname</ion-label>
+      <ion-input [(ngModel)]="user.nickname"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-item>
+    <ion-label>Become an administrator</ion-label>
+    <ion-checkbox [(ngModel)]="isAdmin"></ion-checkbox>
+  </ion-item>
+
+
+  <ion-list-header> 
+    <ion-label>Gender</ion-label>
+  </ion-list-header>
+
+  <ion-radio-group [(ngModel)]="user.gender">
+    <ion-item>
+      <ion-label>Male</ion-label>
+      <ion-radio value="M"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Female</ion-label>
+      <ion-radio value="F"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+
+</ion-content>
