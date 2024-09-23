@@ -1,13 +1,44 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Schedule
+      日程
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-  <ion-content>
-  <ion-datetime presentation="date" [(ngModel)]="datetime"></ion-datetime>
-  </ion-content>
+<ion-content>
+  <!-- Calendar -->
+  <ion-datetime
+    presentation="date"
+    [(ngModel)]="datetime"
+    (ionChange)="onDateSelected($event)">
+  </ion-datetime>
 
+  <!-- Book Holiday Section -->
+  <div class="book-holiday">
+    <h2>Book Holiday</h2>
 
+    <!-- From Section -->
+    <ion-item button (click)="selectFromDate()">
+      <ion-label>From:</ion-label>
+      <ion-text>{{ fromDate ? fromDate : 'Select Date' }}</ion-text>
+    </ion-item>
+
+    <!-- To Section -->
+    <ion-item button (click)="selectToDate()">
+      <ion-label>To:</ion-label>
+      <ion-text>{{ toDate ? toDate : 'Select Date' }}</ion-text>
+    </ion-item>
+
+    <!-- Total Days Booked Section -->
+    <ion-item *ngIf="fromDate && toDate">
+      <ion-label>Total Days booked:</ion-label>
+      <ion-text>{{ totalDays }} days</ion-text>
+    </ion-item>
+
+    <!-- Book Now Button -->
+    <ion-button expand="block" (click)="bookHoliday()" [disabled]="!fromDate || !toDate">
+      Book Now
+    </ion-button>
+  </div>
+</ion-content>
