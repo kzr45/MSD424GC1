@@ -1,0 +1,25 @@
+ion-button {
+  &.check-in {
+    background-color: #3880ff; /* Default color for Check In */
+    color: white;
+
+    &:hover {
+      background-color: #3171e0; /* Darker blue on hover */
+    }
+  }
+
+  &.check-out {
+    background-color: red; /* Color when checked out */
+    color: white;
+
+    &:hover {
+      background-color: darkred; /* Darker red on hover */
+    }
+  }
+}
+
+ion-label {
+  font-size: 1.2rem;
+  color: #333; /* Dark color for the label */
+  margin-top: 10px; /* Space above the label */
+}
