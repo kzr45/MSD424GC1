@@ -80,6 +80,8 @@ export class CheckInPage {
   // Perform the check-out operation
   async checkOut() {
     this.isCheckingIn = false; // Set the checking-in flag to false
+    await this.getCurrentPosition(); // Get current location information
+
     if (!this.isWithinCompanyRange(this.currentPosition)) {
       const alert = await this.alertController.create({
         header: 'Check-Out Error',
@@ -100,7 +102,7 @@ export class CheckInPage {
       return;
     }
 
-    await this.getCurrentPosition(); // Get current location information
+    
     const time = new Date().toLocaleString(); // Get current time
 
     // Check if already checked out
