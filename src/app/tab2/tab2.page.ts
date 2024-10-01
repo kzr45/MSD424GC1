@@ -1,25 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
-import { UserService } from '../service/user.service';
-import { Users } from '../service/user-info.model';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
 })
-export class Tab2Page implements OnInit {
-  userList: Users[] = [];
+export class Tab2Page {
+  leaveRequest = {
+    startDate: '',
+    endDate: '',
+    reason: ''
+  };
 
-  constructor(private userService: UserService, private navCtrl: NavController, private router: Router) { }
+  leaveRequests: Array<any> = [];
 
-  ngOnInit() {
-    this.userList = this.userService.getUsers(); // Get user list
-  }
+  constructor(private alertController: AlertController) {}
 
-  openChat(userId: number) {
-    // Navigate to chat page using user's ID
-    this.router.navigate(['/chat', userId]);
+  async submitLeaveRequest() {
+    // Validate if the fields are filled
+    if (!this.leaveRequest.startDate || !this.leaveRequest.endDate || !this.leaveRequest.reason) {
+      const alert = await this.alertController.create({
+        header: 'Error',
+        message: 'Please fill in all fields before submitting.',
+        buttons: ['OK']
+      });
+      await alert.present();
+      return;
+    }
+
+    // Add the leave request to the local array
+    this.leaveRequests.push({ ...this.leaveRequest });
+
+    // Clear the form
+    this.leaveRequest = { startDate: '', endDate: '', reason: '' };
+
+    // Success alert
+    const alert = await this.alertController.create({
+      header: 'Leave Request Submitted',
+      message: 'Your leave request has been submitted successfully!',
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 }

@@ -1,9 +1,51 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Message</ion-title>
+    <ion-title>Leave Request</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
- 
+  <ion-card>
+    <ion-card-header>
+      Submit Leave Request
+    </ion-card-header>
+
+    <ion-card-content>
+      <!-- Form to submit leave request -->
+      <ion-item>
+        <ion-label position="stacked">Start Date</ion-label>
+        <ion-datetime display-format="MM/DD/YYYY" [(ngModel)]="leaveRequest.startDate"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">End Date</ion-label>
+        <ion-datetime display-format="MM/DD/YYYY" [(ngModel)]="leaveRequest.endDate"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Reason</ion-label>
+        <ion-textarea [(ngModel)]="leaveRequest.reason"></ion-textarea>
+      </ion-item>
+
+      <ion-button expand="block" (click)="submitLeaveRequest()">Submit Request</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Display leave request records -->
+  <ion-card *ngIf="leaveRequests.length > 0">
+    <ion-card-header>
+      Leave Request History
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let request of leaveRequests">
+          <ion-label>
+            <h2>From: {{ request.startDate }} To: {{ request.endDate }}</h2>
+            <p>Reason: {{ request.reason }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
